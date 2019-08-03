@@ -26,30 +26,34 @@ class Game {
     for(let i = 0; i < this.x; i++){
       this.board.push([])
       for (let j=0; j < this.y; j++){
-        this.board[i].push(new Cell())
+        let temp = new Cell()
+        temp.key = (i * this.x) + j + 1
+        //initialize the bombs on the board.  will randomize placements after
+        if (bombsCount < this.bombs){
+          temp.isBomb = true
+          bombsCount++
+        }
+        this.board[i].push(temp)
       }
     }
-    let row = 0
-    let index = 0
-    while (bombsCount < this.bombs){
-      if (this.board[row][index]){
-        this.board[row][index].isBomb = true
-        index++
-        bombsCount++
-      } else {
-        row++
-        index = 0
+    //now that board is initialized call a function to randomly swap tiles on the board
+    for (let i = 0; i <  this.x - 1; i++) {
+      for (let j = 0; j < this.y - 1; j++) {
+      let rando = Math.floor(Math.random() * (this.board.length)); // random index from 0 to x
+      let rando2 = Math.floor(Math.random() * (this.board.length)); //using board length cause inclusive
+      let temp = this.board[i][j]   // swap elements
+      this.board[i][j] = this.board[rando][rando2]
+      this.board[rando][rando2] = temp
       }
 
     }
-
     return this.board
     }
 
 
   }
 
-let x = new Game(5,5,20)
+let x = new Game(5,5,10)
 
 let arr = x.start()
 
@@ -59,10 +63,13 @@ return (
   <div>
     {arr.map(row => {
 
-      return row.map(index => {
-        console.log(index.isBomb)
-        return <div>{index.isBomb ? 'x' : '√'}</div>
-      })
+
+        return (<div>Row {row.map(index => {
+          console.log(index.isBomb)
+          return <div>{index.isBomb ? '√' : 'x'}</div>
+        }
+      )}</div>)
+
     })}
   </div>
 
