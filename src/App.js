@@ -1,6 +1,7 @@
 import React from 'react';
 import Cell from './Cell'
 import './App.css';
+
 function App(){
 
 
@@ -45,8 +46,31 @@ class Game {
       this.board[i][j] = this.board[rando][rando2]
       this.board[rando][rando2] = temp
       }
-
     }
+    //now go through and see hos many adjacent tiles are bombs
+    console.log(this.board)
+    for(let x = 0; x < this.x; x++){
+      for (let y=0; y < this.y; y++){
+        let count = 0
+        let self = this.board[x][y]
+
+        if (this.board[x-1][y-1]&& this.board[x-1][y-1].isBomb){  count++  }
+        if (this.board[x-1][y]&& this.board[x-1][y].isBomb){  count++  }
+        if (this.board[x-1][y+1]&& this.board[x-1][y+1].isBomb){  count++  }
+        if (this.board[x][y-1]&& this.board[x][y-1].isBomb){  count++  }
+        if (this.board[x][y+1]&& this.board[x][y+1].isBomb){  count++  }
+        if (this.board[x+1][y-1]&& this.board[x+1][y].isBomb){  count++  }
+        if (this.board[x+1][y]&& this.board[x+1][y].isBomb){  count++  }
+        if (this.board[x+1][y+1]&& this.board[x+1][y+1].isBomb){  count++  }
+
+
+        self.isTouching = count
+
+
+      }
+    }
+
+
     return this.board
     }
 

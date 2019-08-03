@@ -10,7 +10,7 @@ class Cell extends React.Component {
   }
   render(){
     return(
-      <div> O </div>
+      <div>O</div>
     )
 
   }
