@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.tile{
+  background: rgb(104, 164, 165)!important;
+  margin: .5em -.75em !important;
+  padding: 1em 1.5em !important;
+  font-weight: bolder !important;
+}
